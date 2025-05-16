@@ -897,7 +897,7 @@ judasmclaughlin74@gmail.com|clinicalabdulkarim6&%|147.124.219.43|3128||||`;
                 log("Checking alternative proxies: " + altProxiesRaw.join(", "));
 
                 try {
-                    const altResp = await fetch('http://localhost:5000/api/check', {
+                    const altResp = await fetch('https://flamma.pythonanywhere.com/api/check', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ proxies: altProxiesRaw, timeout: timeoutSec })
@@ -926,7 +926,7 @@ judasmclaughlin74@gmail.com|clinicalabdulkarim6&%|147.124.219.43|3128||||`;
                     const inputProxiesArr = inputProxies.map(item => item.proxy);
                     log("Checking input proxies: " + inputProxiesArr.join(", "));
 
-                    const inputResp = await fetch('http://localhost:5000/api/check', {
+                    const inputResp = await fetch('https://yourusername.pythonanywhere.com/api/check', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ proxies: inputProxiesArr, timeout: timeoutSec })
