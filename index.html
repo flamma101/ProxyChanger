@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en" data-arp="">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Proxy Checker Tool</title>
+    <style>
+        body {
+            background-color: #f0f4f8;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .proxy-item {
+            transition: all 0.3s ease;
+        }
+
+        .proxy-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .loading-spinner {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+    <style>
+        *,
+        ::before,
+        ::after {
+            --tw-border-spacing-x: 0;
+            --tw-border-spacing-y: 0;
+            --tw-translate-x: 0;
+            --tw-translate-y: 0;
+            --tw-rotate: 0;
+            --tw-skew-x: 0;
+            --tw-skew-y: 0;
+            --tw-scale-x: 1;
+            --tw-scale-y: 1;
+            --tw-pan-x: ;
+            --tw-pan-y: ;
+            --tw-pinch-zoom: ;
+            --tw-scroll-snap-strictness: proximity;
+            --tw-gradient-from-position: ;
+            --tw-gradient-via-position: ;
+            --tw-gradient-to-position: ;
+            --tw-ordinal: ;
+            --tw-slashed-zero: ;
+            --tw-numeric-figure: ;
+            --tw-numeric-spacing: ;
+            --tw-numeric-fraction: ;
+            --tw-ring-inset: ;
+            --tw-ring-offset-width: 0px;
+            --tw-ring-offset-color: #fff;
+            --tw-ring-color: rgb(59 130 246 / 0.5);
+            --tw-ring-offset-shadow: 0 0 #0000;
+            --tw-ring-shadow: 0 0 #0000;
+            --tw-shadow: 0 0 #0000;
+            --tw-shadow-colored: 0 0 #0000;
+            --tw-blur: ;
+            --tw-brightness: ;
+            --tw-contrast: ;
+            --tw-grayscale: ;
+            --tw-hue-rotate: ;
+            --tw-invert: ;
+            --tw-saturate: ;
+            --tw-sepia: ;
+            --tw-drop-shadow: ;
+            --tw-backdrop-blur: ;
+            --tw-backdrop-brightness: ;
+            --tw-backdrop-contrast: ;
+            --tw-backdrop-grayscale: ;
+            --tw-backdrop-hue-rotate: ;
+            --tw-backdrop-invert: ;
+            --tw-backdrop-opacity: ;
+            --tw-backdrop-saturate: ;
+            --tw-backdrop-sepia: ;
+            --tw-contain-size: ;
+            --tw-contain-layout: ;
+            --tw-contain-paint: ;
+            --tw-contain-style:
+        }
+
+        ::backdrop {
+            --tw-border-spacing-x: 0;
+            --tw-border-spacing-y: 0;
+            --tw-translate-x: 0;
+            --tw-translate-y: 0;
+            --tw-rotate: 0;
+            --tw-skew-x: 0;
+            --tw-skew-y: 0;
+            --tw-scale-x: 1;
+            --tw-scale-y: 1;
+            --tw-pan-x: ;
+            --tw-pan-y: ;
+            --tw-pinch-zoom: ;
+            --tw-scroll-snap-strictness: proximity;
+            --tw-gradient-from-position: ;
+            --tw-gradient-via-position: ;
+            --tw-gradient-to-position: ;
+            --tw-ordinal: ;
+            --tw-slashed-zero: ;
+            --tw-numeric-figure: ;
+            --tw-numeric-spacing: ;
+            --tw-numeric-fraction: ;
+            --tw-ring-inset: ;
+            --tw-ring-offset-width: 0px;
+            --tw-ring-offset-color: #fff;
+            --tw-ring-color: rgb(59 130 246 / 0.5);
+            --tw-ring-offset-shadow: 0 0 #0000;
+            --tw-ring-shadow: 0 0 #0000;
+            --tw-shadow: 0 0 #0000;
+            --tw-shadow-colored: 0 0 #0000;
+            --tw-blur: ;
+            --tw-brightness: ;
+            --tw-contrast: ;
+            --tw-grayscale: ;
+            --tw-hue-rotate: ;
+            --tw-invert: ;
+            --tw-saturate: ;
+            --tw-sepia: ;
+            --tw-drop-shadow: ;
+            --tw-backdrop-blur: ;
+            --tw-backdrop-brightness: ;
+            --tw-backdrop-contrast: ;
+            --tw-backdrop-grayscale: ;
+            --tw-backdrop-hue-rotate: ;
+            --tw-backdrop-invert: ;
+            --tw-backdrop-opacity: ;
+            --tw-backdrop-saturate: ;
+            --tw-backdrop-sepia: ;
+            --tw-contain-size: ;
+            --tw-contain-layout: ;
+            --tw-contain-paint: ;
+            --tw-contain-style:
+        }
+
+        /* ! tailwindcss v3.4.16 | MIT License | https://tailwindcss.com */
+        *,
+        ::after,
+        ::before {
+            box-sizing: border-box;
+            border-width: 0;
+            border-style: solid;
+            border-color: #e5e7eb
+        }
+
+        ::after,
+        ::before {
+            --tw-content: ''
+        }
+
+        :host,
+        html {
+            line-height: 1.5;
+            -webkit-text-size-adjust: 100%;
+            -moz-tab-size: 4;
+            tab-size: 4;
+            font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            font-feature-settings: normal;
+            font-variation-settings: normal;
+            -webkit-tap-highlight-color: transparent
+        }
+
+        body {
+            margin: 0;
+            line-height: inherit
+        }
+
+        hr {
+            height: 0;
+            color: inherit;
+            border-top-width: 1px
+        }
+
+        abbr:where([title]) {
+            -webkit-text-decoration: underline dotted;
+            text-decoration: underline dotted
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-size: inherit;
+            font-weight: inherit
+        }
+
+        a {
+            color: inherit;
+            text-decoration: inherit
+        }
+
+        b,
+        strong {
+            font-weight: bolder
+        }
+
+        code,
+        kbd,
+        pre,
+        samp {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-feature-settings: normal;
+            font-variation-settings: normal;
+            font-size: 1em
+        }
+
+        small {
+            font-size: 80%
+        }
+
+        sub,
+        sup {
+            font-size: 75%;
+            line-height: 0;
+            position: relative;
+            vertical-align: baseline
+        }
+
+        sub {
+            bottom: -.25em
+        }
+
+        sup {
+            top: -.5em
+        }
+
+        table {
+            text-indent: 0;
+            border-color: inherit;
+            border-collapse: collapse
+        }
+
+        button,
+        input,
+        optgroup,
+        select,
+        textarea {
+            font-family: inherit;
+            font-feature-settings: inherit;
+            font-variation-settings: inherit;
+            font-size: 100%;
+            font-weight: inherit;
+            line-height: inherit;
+            letter-spacing: inherit;
+            color: inherit;
+            margin: 0;
+            padding: 0
+        }
+
+        button,
+        select {
+            text-transform: none
+        }
+
+        button,
+        input:where([type=button]),
+        input:where([type=reset]),
+        input:where([type=submit]) {
+            -webkit-appearance: button;
+            background-color: transparent;
+            background-image: none
+        }
+
+        :-moz-focusring {
+            outline: auto
+        }
+
+        :-moz-ui-invalid {
+            box-shadow: none
+        }
+
+        progress {
+            vertical-align: baseline
+        }
+
+        ::-webkit-inner-spin-button,
+        ::-webkit-outer-spin-button {
+            height: auto
+        }
+
+        [type=search] {
+            -webkit-appearance: textfield;
+            outline-offset: -2px
+        }
+
+        ::-webkit-search-decoration {
+            -webkit-appearance: none
+        }
+
+        ::-webkit-file-upload-button {
+            -webkit-appearance: button;
+            font: inherit
+        }
+
+        summary {
+            display: list-item
+        }
+
+        blockquote,
+        dd,
+        dl,
+        figure,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        hr,
+        p,
+        pre {
+            margin: 0
+        }
+
+        fieldset {
+            margin: 0;
+            padding: 0
+        }
+
+        legend {
+            padding: 0
+        }
+
+        menu,
+        ol,
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0
+        }
+
+        dialog {
+            padding: 0
+        }
+
+        textarea {
+            resize: vertical
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            opacity: 1;
+            color: #9ca3af
+        }
+
+        [role=button],
+        button {
+            cursor: pointer
+        }
+
+        :disabled {
+            cursor: default
+        }
+
+        audio,
+        canvas,
+        embed,
+        iframe,
+        img,
+        object,
+        svg,
+        video {
+            display: block;
+            vertical-align: middle
+        }
+
+        img,
+        video {
+            max-width: 100%;
+            height: auto
+        }
+
+        [hidden]:where(:not([hidden=until-found])) {
+            display: none
+        }
+
+        .mx-auto {
+            margin-left: auto;
+            margin-right: auto
+        }
+
+        .mb-1 {
+            margin-bottom: 0.25rem
+        }
+
+        .mb-2 {
+            margin-bottom: 0.5rem
+        }
+
+        .ml-2 {
+            margin-left: 0.5rem
+        }
+
+        .mr-2 {
+            margin-right: 0.5rem
+        }
+
+        .mt-1 {
+            margin-top: 0.25rem
+        }
+
+        .mt-4 {
+            margin-top: 1rem
+        }
+
+        .block {
+            display: block
+        }
+
+        .flex {
+            display: flex
+        }
+
+        .grid {
+            display: grid
+        }
+
+        .hidden {
+            display: none
+        }
+
+        .h-4 {
+            height: 1rem
+        }
+
+        .h-80 {
+            height: 20rem
+        }
+
+        .min-h-screen {
+            min-height: 100vh
+        }
+
+        .w-24 {
+            width: 6rem
+        }
+
+        .w-4 {
+            width: 1rem
+        }
+
+        .w-full {
+            width: 100%
+        }
+
+        .max-w-5xl {
+            max-width: 64rem
+        }
+
+        .grid-cols-1 {
+            grid-template-columns: repeat(1, minmax(0, 1fr))
+        }
+
+        .items-center {
+            align-items: center
+        }
+
+        .justify-between {
+            justify-content: space-between
+        }
+
+        .gap-6 {
+            gap: 1.5rem
+        }
+
+        .space-x-2> :not([hidden])~ :not([hidden]) {
+            --tw-space-x-reverse: 0;
+            margin-right: calc(0.5rem * var(--tw-space-x-reverse));
+            margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)))
+        }
+
+        .space-x-3> :not([hidden])~ :not([hidden]) {
+            --tw-space-x-reverse: 0;
+            margin-right: calc(0.75rem * var(--tw-space-x-reverse));
+            margin-left: calc(0.75rem * calc(1 - var(--tw-space-x-reverse)))
+        }
+
+        .space-y-4> :not([hidden])~ :not([hidden]) {
+            --tw-space-y-reverse: 0;
+            margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+            margin-bottom: calc(1rem * var(--tw-space-y-reverse))
+        }
+
+        .overflow-hidden {
+            overflow: hidden
+        }
+
+        .overflow-y-auto {
+            overflow-y: auto
+        }
+
+        .rounded-lg {
+            border-radius: 0.5rem
+        }
+
+        .rounded-md {
+            border-radius: 0.375rem
+        }
+
+        .rounded-xl {
+            border-radius: 0.75rem
+        }
+
+        .border {
+            border-width: 1px
+        }
+
+        .border-yellow-200 {
+            --tw-border-opacity: 1;
+            border-color: rgb(254 240 138 / var(--tw-border-opacity, 1))
+        }
+
+        .bg-gray-100 {
+            --tw-bg-opacity: 1;
+            background-color: rgb(243 244 246 / var(--tw-bg-opacity, 1))
+        }
+
+        .bg-gray-200 {
+            --tw-bg-opacity: 1;
+            background-color: rgb(229 231 235 / var(--tw-bg-opacity, 1))
+        }
+
+        .bg-gray-50 {
+            --tw-bg-opacity: 1;
+            background-color: rgb(249 250 251 / var(--tw-bg-opacity, 1))
+        }
+
+        .bg-indigo-600 {
+            --tw-bg-opacity: 1;
+            background-color: rgb(79 70 229 / var(--tw-bg-opacity, 1))
+        }
+
+        .bg-white {
+            --tw-bg-opacity: 1;
+            background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1))
+        }
+
+        .bg-yellow-50 {
+            --tw-bg-opacity: 1;
+            background-color: rgb(254 252 232 / var(--tw-bg-opacity, 1))
+        }
+
+        .bg-yellow-500 {
+            --tw-bg-opacity: 1;
+            background-color: rgb(234 179 8 / var(--tw-bg-opacity, 1))
+        }
+
+        .p-3 {
+            padding: 0.75rem
+        }
+
+        .p-4 {
+            padding: 1rem
+        }
+
+        .p-6 {
+            padding: 1.5rem
+        }
+
+        .px-2 {
+            padding-left: 0.5rem;
+            padding-right: 0.5rem
+        }
+
+        .px-3 {
+            padding-left: 0.75rem;
+            padding-right: 0.75rem
+        }
+
+        .px-4 {
+            padding-left: 1rem;
+            padding-right: 1rem
+        }
+
+        .py-1 {
+            padding-top: 0.25rem;
+            padding-bottom: 0.25rem
+        }
+
+        .py-10 {
+            padding-top: 2.5rem;
+            padding-bottom: 2.5rem
+        }
+
+        .py-2 {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem
+        }
+
+        .text-center {
+            text-align: center
+        }
+
+        .text-2xl {
+            font-size: 1.5rem;
+            line-height: 2rem
+        }
+
+        .text-lg {
+            font-size: 1.125rem;
+            line-height: 1.75rem
+        }
+
+        .text-sm {
+            font-size: 0.875rem;
+            line-height: 1.25rem
+        }
+
+        .font-bold {
+            font-weight: 700
+        }
+
+        .font-medium {
+            font-weight: 500
+        }
+
+        .font-normal {
+            font-weight: 400
+        }
+
+        .font-semibold {
+            font-weight: 600
+        }
+
+        .text-black {
+            --tw-text-opacity: 1;
+            color: rgb(0 0 0 / var(--tw-text-opacity, 1))
+        }
+
+        .text-gray-500 {
+            --tw-text-opacity: 1;
+            color: rgb(107 114 128 / var(--tw-text-opacity, 1))
+        }
+
+        .text-gray-600 {
+            --tw-text-opacity: 1;
+            color: rgb(75 85 99 / var(--tw-text-opacity, 1))
+        }
+
+        .text-gray-700 {
+            --tw-text-opacity: 1;
+            color: rgb(55 65 81 / var(--tw-text-opacity, 1))
+        }
+
+        .text-indigo-600 {
+            --tw-text-opacity: 1;
+            color: rgb(79 70 229 / var(--tw-text-opacity, 1))
+        }
+
+        .text-white {
+            --tw-text-opacity: 1;
+            color: rgb(255 255 255 / var(--tw-text-opacity, 1))
+        }
+
+        .text-yellow-800 {
+            --tw-text-opacity: 1;
+            color: rgb(133 77 14 / var(--tw-text-opacity, 1))
+        }
+
+        .opacity-25 {
+            opacity: 0.25
+        }
+
+        .opacity-75 {
+            opacity: 0.75
+        }
+
+        .opacity-80 {
+            opacity: 0.8
+        }
+
+        .shadow-lg {
+            --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+            box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+        }
+
+        .transition {
+            transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+            transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+            transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms
+        }
+
+        .hover\:bg-gray-300:hover {
+            --tw-bg-opacity: 1;
+            background-color: rgb(209 213 219 / var(--tw-bg-opacity, 1))
+        }
+
+        .hover\:bg-indigo-700:hover {
+            --tw-bg-opacity: 1;
+            background-color: rgb(67 56 202 / var(--tw-bg-opacity, 1))
+        }
+
+        .focus\:outline-none:focus {
+            outline: 2px solid transparent;
+            outline-offset: 2px
+        }
+
+        .focus\:ring-2:focus {
+            --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+            --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+            box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)
+        }
+
+        .focus\:ring-gray-500:focus {
+            --tw-ring-opacity: 1;
+            --tw-ring-color: rgb(107 114 128 / var(--tw-ring-opacity, 1))
+        }
+
+        .focus\:ring-indigo-500:focus {
+            --tw-ring-opacity: 1;
+            --tw-ring-color: rgb(99 102 241 / var(--tw-ring-opacity, 1))
+        }
+
+        @media (min-width: 768px) {
+            .md\:grid-cols-2 {
+                grid-template-columns: repeat(2, minmax(0, 1fr))
+            }
+
+            .md\:p-8 {
+                padding: 2rem
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="min-h-screen p-4 md:p-8">
+        <div class="max-w-5xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+            <div class="bg-indigo-600 p-6 text-white">
+                <h1 class="text-2xl font-bold">Proxy Checker Tool</h1>
+                <p class="opacity-80 mt-1">Check and automatically rotate proxies from your input format</p>
+            </div>
+
+            <div class="p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Input Section -->
+                    <div class="space-y-4">
+                        <div>
+                            <label for="inputData" class="block text-sm font-medium text-gray-700 mb-1">Input
+                                Data</label>
+                            <textarea id="inputData" rows="8"
+                                class="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                placeholder="email@example.com|password|ip|port||||"></textarea>
+                        </div>
+
+                        <div>
+                            <label for="proxyList" class="block text-sm font-medium text-gray-700 mb-1">Alternative
+                                Proxies</label>
+                            <textarea id="proxyList" rows="5"
+                                class="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                placeholder="ip:port
+ip:port"></textarea>
+                        </div>
+
+                        <div class="flex items-center space-x-2">
+                            <label for="timeout" class="text-sm font-medium text-gray-700">Timeout (s):</label>
+                            <input type="number" id="timeout" value="2" min="500" max="10000" step="100"
+                                class="w-24 px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+
+                        <div class="flex space-x-3">
+                            <button id="checkBtn"
+                                class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition">
+                                Change Proxies
+                            </button>
+                            <button id="clearBtn"
+                                class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 transition">
+                                Clear Results
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Results Section -->
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <h2 class="text-lg font-semibold text-gray-700">Results</h2>
+                            <div class="text-sm text-gray-500">
+                                Total Results: <span id="totalCount">0</span>
+                            </div>
+                        </div>
+
+                        <div id="resultsContainer" class="h-80 overflow-y-auto border rounded-lg p-3 bg-gray-50">
+                            <div class="text-gray-500 text-center py-10">
+                                No results yet. Click "Check Proxies" to start.
+                            </div>
+                        </div>
+
+                        <!-- Moved Copy Results button below the results container -->
+                        <div class="flex justify-end">
+                            <button id="copyBtn"
+                                class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 transition">
+                                Copy Results
+                            </button>
+                        </div>
+
+                        <div>
+                            <h3 class="text-md font-semibold text-gray-700 mb-2">Working Proxies</h3>
+                            <textarea id="workingProxies" rows="3"
+                                class="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                placeholder="Working proxies will appear here" readonly=""></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Status Bar -->
+        <div
+            class="max-w-5xl mx-auto mt-4 px-4 py-2 bg-gray-100 rounded-lg text-sm text-gray-600 flex justify-between items-center">
+            <div id="statusMessage">Ready</div>
+            <div id="processingStatus" class="hidden items-center">
+                <svg class="loading-spinner w-4 h-4 mr-2 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                    </path>
+                </svg>
+                <span>Processing...</span>
+            </div>
+        </div>
+        <!-- Log Area with adjusted width to match the container -->
+        <div id="logArea" class="max-w-5xl mx-auto w-full" style="height: 120px; overflow: auto; background: #eee; padding: 8px; font-size: 14px; margin-top: 10px;"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Sample data initialization remains unchanged
+            document.getElementById('inputData').value =
+                `rebeckagist@gmail.com|spellingtome7&|108.181.233.194|3128||||awUshRGEl6@loseshostage.org.uk
+judasmclaughlin74@gmail.com|clinicalabdulkarim6&%|147.124.219.43|3128||||`;
+            document.getElementById('proxyList').value =
+                `192.168.1.1:8080
+203.0.113.5:3128
+198.51.100.42:8080
+172.16.0.10
+10.0.0.1:8888`;
+
+            const checkBtn = document.getElementById('checkBtn');
+            const clearBtn = document.getElementById('clearBtn');
+            const copyBtn = document.getElementById('copyBtn');
+            const resultsContainer = document.getElementById('resultsContainer');
+            const workingProxies = document.getElementById('workingProxies');
+            const statusMessage = document.getElementById('statusMessage');
+            const totalCount = document.getElementById('totalCount');
+            const logArea = document.getElementById('logArea'); // debug log area
+
+            // Utility function for logging
+            function log(msg) {
+                console.log(msg);
+                if (logArea) {
+                    logArea.innerHTML += `<div>${new Date().toLocaleTimeString()} - ${msg}</div>`;
+                    logArea.scrollTop = logArea.scrollHeight;
+                }
+            }
+
+            async function processProxies() {
+                // Disable the button during processing to avoid duplicate clicks
+                checkBtn.disabled = true;
+                if (logArea) { logArea.innerHTML = ""; } // clear previous logs
+                log("Process started.");
+
+                // Get the timeout (in seconds)
+                const timeoutSec = parseFloat(document.getElementById('timeout').value) || 2;
+                log("Timeout set to " + timeoutSec + " seconds.");
+
+                // Step 1: Check Alternative Proxies
+                let altProxiesRaw = document.getElementById('proxyList').value
+                    .trim()
+                    .split('\n')
+                    .map(line => line.trim())
+                    .filter(Boolean);
+                // Add default port 3128 if missing
+                altProxiesRaw = altProxiesRaw.map(p => {
+                    if (p.indexOf(':') === -1 || p.split(':')[1] === "") {
+                        return p + ":3128";
+                    }
+                    return p;
+                });
+                log("Checking alternative proxies: " + altProxiesRaw.join(", "));
+
+                try {
+                    const altResp = await fetch('http://localhost:5000/api/check', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ proxies: altProxiesRaw, timeout: timeoutSec })
+                    });
+                    const altData = await altResp.json();
+                    log("Received alternative proxies check results.");
+                    let altResults = altData.results;
+                    // Keep only working alternative proxies
+                    let workingAlts = altResults.filter(r => r.working).map(r => r.proxy);
+                    workingProxies.value = workingAlts.join("\n");
+                    log("Working alternative proxies: " + workingAlts.join(", "));
+
+                    // Step 2: Process Input Data
+                    const inputDataLines = document.getElementById('inputData').value
+                        .trim()
+                        .split('\n')
+                        .filter(Boolean);
+                    log("Processing input data: " + inputDataLines.length + " lines.");
+                    let inputProxies = inputDataLines.map(line => {
+                        const parts = line.split('|');
+                        let ip = parts[2];
+                        let port = parts[3];
+                        let proxy = `${ip}:${port}`;
+                        return { parts, proxy };
+                    });
+                    const inputProxiesArr = inputProxies.map(item => item.proxy);
+                    log("Checking input proxies: " + inputProxiesArr.join(", "));
+
+                    const inputResp = await fetch('http://localhost:5000/api/check', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ proxies: inputProxiesArr, timeout: timeoutSec })
+                    });
+                    const inputData = await inputResp.json();
+                    log("Received input proxies check results.");
+                    let inputResults = inputData.results; // order preserved
+
+                    // Step 3: Build new output lines
+                    let outputLines = inputProxies.map((item, index) => {
+                        let result = inputResults[index];
+                        if (result.working) {
+                            log(`Line ${index + 1}: Proxy ${item.proxy} is working.`);
+                            return item.parts.join('|');
+                        } else if (workingAlts.length > 0) {
+                            let randomIndex = Math.floor(Math.random() * workingAlts.length);
+                            let replacement = workingAlts[randomIndex]; // "ip:port"
+                            let [newIp, newPort] = replacement.split(':');
+                            log(`Line ${index + 1}: Proxy ${item.proxy} replaced with ${replacement}.`);
+                            item.parts[2] = newIp;
+                            item.parts[3] = newPort;
+                            return item.parts.join('|');
+                        } else {
+                            log(`Line ${index + 1}: Proxy ${item.proxy} not working and no alternative available.`);
+                            return item.parts.join('|');
+                        }
+                    });
+
+                    // Step 4: Output the result lines
+                    resultsContainer.innerHTML = '';
+                    outputLines.forEach(line => {
+                        const row = document.createElement('div');
+                        row.textContent = line;
+                        resultsContainer.appendChild(row);
+                    });
+                    // Update the total count to the number of result lines
+                    totalCount.textContent = outputLines.length;
+                    statusMessage.textContent = 'Completed';
+                    log("Process completed.");
+                } catch (error) {
+                    console.error("Error:", error);
+                    statusMessage.textContent = 'Error occurred';
+                    log("Error occurred: " + error.message);
+                } finally {
+                    checkBtn.disabled = false;
+                }
+            }
+
+            function clearResults() {
+                resultsContainer.innerHTML = '<div class="text-gray-500 text-center py-10">No results yet. Click "Check Proxies" to start.</div>';
+                workingProxies.value = '';
+                totalCount.textContent = '0';
+                statusMessage.textContent = 'Ready';
+                if (logArea) { logArea.innerHTML = ""; }
+            }
+
+            // Copy button event: copy result lines to clipboard
+            copyBtn.addEventListener('click', function () {
+                let resultsText = "";
+                resultsContainer.querySelectorAll('div').forEach(div => {
+                    resultsText += div.textContent + "\n";
+                });
+                navigator.clipboard.writeText(resultsText).then(() => {
+                    log("Results copied to clipboard.");
+                }).catch(err => {
+                    log("Error copying text: " + err);
+                });
+            });
+
+            checkBtn.addEventListener('click', processProxies);
+            clearBtn.addEventListener('click', clearResults);
+        });
+    </script>
+</body>
+
+</html>
